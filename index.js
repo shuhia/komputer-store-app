@@ -78,7 +78,13 @@ function User() {
   };
   this.render = () => {
     document.getElementById("balance").innerHTML = this.balance + this.currency;
-    document.getElementById("loan-value").innerHTML = this.debt + this.currency;
+    if (this.debt > 0) {
+      document.getElementById("debt").style.display = "block";
+      document.getElementById("loan-value").innerHTML =
+        this.debt + this.currency;
+    } else {
+      document.getElementById("loan-value").style.display = "none";
+    }
     document.getElementById("work-balance").value =
       this.workBalance + this.currency;
   };
