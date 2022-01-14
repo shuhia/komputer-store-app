@@ -39,7 +39,7 @@
                     <label for="balance">Balance:</label>
                     <output id="balance"></output>
                   </div>
-                  <div>Loan value: <span id="loan-value"></span></div>
+                  <div id="debt">Loan value: <span id="loan-value"></span></div>
                   <button
                     type="button"
                     class="btn btn-success"
@@ -74,6 +74,13 @@
                     onclick="user.work()"
                   >
                     Work
+                  </button>
+                  <button
+                    id="repay-loan-button"
+                    class="btn btn-danger"
+                    onclick="user.repayLoan()"
+                  >
+                    Repay Loan
                   </button>
                 </div>
               </div>

@@ -27,7 +27,7 @@ const bank = {
 };
 
 function User() {
-  this.salary = 1000;
+  this.salary = 100;
   this.balance = 1000;
   this.currency = "kr";
   this.debt = 0;
@@ -65,8 +65,15 @@ function User() {
     this.debt -= amount;
     if (this.debt < 0) {
       let leftOver = -this.debt;
+      this.debt = 0;
       return leftOver;
     } else return 0;
+  };
+  this.repayLoan = () => {
+    const leftOver = this.payDebt(this.workBalance);
+    this.workBalance = 0;
+    this.balance += leftOver;
+    this.render();
   };
   this.buy = (laptop) => {
     if (this.balance >= laptop.price) {
@@ -79,11 +86,14 @@ function User() {
   this.render = () => {
     document.getElementById("balance").innerHTML = this.balance + this.currency;
     if (this.debt > 0) {
+      document.getElementById("repay-loan-button").style.display = "block";
       document.getElementById("debt").style.display = "block";
+
       document.getElementById("loan-value").innerHTML =
         this.debt + this.currency;
     } else {
-      document.getElementById("loan-value").style.display = "none";
+      document.getElementById("repay-loan-button").style.display = "none";
+      document.getElementById("debt").style.display = "none";
     }
     document.getElementById("work-balance").value =
       this.workBalance + this.currency;
