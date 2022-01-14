@@ -32,6 +32,7 @@ function User() {
   this.currency = "kr";
   this.debt = 0;
   this.workBalance = 0;
+  this.cart = [];
   this.work = () => {
     this.workBalance += this.salary;
     this.render();
@@ -50,9 +51,11 @@ function User() {
     this.render();
   };
   this.loan = () => {
-    const input = prompt("Please enter amount to loan");
+    const input = prompt(
+      "Please enter amount to loan." + " Max: " + this.balance * 2
+    );
     const amount = parseInt(input, 10);
-    if (amount + this.debt < 2 * this.balance) {
+    if (amount + this.debt <= 2 * this.balance && this.debt === 0) {
       this.balance += amount;
       this.debt += amount;
     }
@@ -65,7 +68,14 @@ function User() {
       return leftOver;
     } else return 0;
   };
-  this.buy = () => {};
+  this.buy = (laptop) => {
+    if (this.balance >= laptop.price) {
+      this.balance -= laptop.price;
+      this.cart.push(laptop);
+      console.log("user bought laptop: ", laptop);
+    }
+    this.render();
+  };
   this.render = () => {
     document.getElementById("balance").innerHTML = this.balance + this.currency;
     document.getElementById("loan-value").innerHTML = this.debt + this.currency;
@@ -96,11 +106,11 @@ const exampleLaptop = {
   image: "assets/images/1.png",
 };
 
-async function fetchLaptops() {
+const hostName = "https://noroff-komputer-store-api.herokuapp.com";
+
+async function fetchLaptops(hostName) {
   // Fetch laptops from Noroffs API
-  const laptops = await fetch(
-    "https://noroff-komputer-store-api.herokuapp.com/computers"
-  )
+  const laptops = await fetch(hostName + "/computers")
     .then((response) => response.json())
     .catch((error) => {
       console.log(error);
@@ -110,46 +120,61 @@ async function fetchLaptops() {
   return laptops;
 }
 
-fetchLaptops().then((laptops = []) => {
+const laptopsView = new LaptopsView(document.querySelector(".laptops"));
+fetchLaptops(hostName).then((laptops = []) => {
   // update view
   // Display laptops
-  const laptopsView = document.querySelector(".laptops");
-  const selectElement = laptopsView.querySelector("select");
-  const featureElement = laptopsView.querySelector("ul");
-  selectElement.innerHTML = laptops.map(
-    (laptop) => `<option value=${laptop.id}>${laptop.title}</option>`
-  );
-
-  function displayFeatures(laptop) {
-    const features = laptop.specs.map((spec) => `<li>${spec}</li>`).join("");
-    featureElement.innerHTML = features;
-  }
-  // display selected laptop
-  if (laptops) displayFeatures(laptops[0]);
-
-  const handleChange = (e) => {
-    const id = e.target.value;
-    const selectedLaptop = laptops.find((laptop) => laptop.id == id);
-    if (selectedLaptop) displayFeatures(selectedLaptop);
-    console.log(laptops);
-  };
-
-  selectElement.addEventListener("change", handleChange);
-
-  // Display selectedLaptop
+  laptopsView.render(laptops);
 });
 
 // Renders a card with select and display features of the selected laptop
-function LaptopsView(element, laptops) {
+function LaptopsView(element) {
+  this.laptopView = new LaptopView(document.querySelector(".laptop"));
   this.selectedLaptop = {};
-  this.laptops = laptops;
+  this.select = element.querySelector("select");
+  this.list = element.querySelector("ul");
+  this.displayFeatures = (laptop) => {
+    const features = laptop.specs.map((spec) => `<li>${spec}</li>`).join("");
+    this.list.innerHTML = features;
+  };
   // Updates the DOM with new HTML code
-  this.render = function () {};
+  this.render = function (laptops) {
+    this.select.innerHTML = laptops.map(
+      (laptop) => `<option value=${laptop.id}>${laptop.title}</option>`
+    );
+
+    // display selected laptop
+    selectedLaptop = laptops[0];
+    if (selectedLaptop) {
+      this.displayFeatures(selectedLaptop);
+      this.laptopView.render(selectedLaptop);
+    }
+
+    const handleChange = (e) => {
+      const id = e.target.value;
+      const selectedLaptop = laptops.find((laptop) => laptop.id == id);
+      if (selectedLaptop) this.displayFeatures(selectedLaptop);
+      if (selectedLaptop) this.laptopView.render(selectedLaptop);
+    };
+    this.select.addEventListener("change", handleChange);
+  };
 }
 
-function LaptopView(element, selectedLaptop) {
-  this.view = ``;
-  this.render = function () {
-    element.innerHTML = view;
+function LaptopView(element) {
+  this.title = element.querySelector(".laptop-title");
+  this.description = element.querySelector(".laptop-description");
+  this.image = element.querySelector(".laptop-image");
+  this.price = element.querySelector(".laptop-price");
+  this.buy = element.querySelector("button");
+  this.render = function (laptop) {
+    console.log("render: LaptopView");
+    this.title.innerText = laptop.title;
+    this.description.innerText = laptop.description;
+    this.image.src = hostName + "/" + laptop.image;
+    this.price.innerText = laptop.price + " kr";
+    this.buy.onclick = () => {
+      user.buy(laptop);
+      console.log("buy laptop");
+    };
   };
 }
