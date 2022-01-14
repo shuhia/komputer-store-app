@@ -85,16 +85,15 @@
                 <div class="card-body">
                   <h1>Laptops</h1>
                   <select
+                    id="laptops-select"
                     class="form-select"
                     aria-label="Default select example"
                   >
                     <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1"></option>
                   </select>
                   <h2>Features:</h2>
-                  <ul></ul>
+                  <ul id="laptops-features"></ul>
                 </div>
               </div>
             </section>
@@ -103,17 +102,36 @@
         <div class="row">
           <div class="col">
             <section class="laptop">
-              <h1>Product name</h1>
-              <p>Description</p>
-              <div>
-                <h2>1500 NOK</h2>
-                <button
-                  class="btn btn-info"
-                  id="buy-button"
-                  onclick="user.buy()"
-                >
-                  BUY NOW
-                </button>
+              <div class="card">
+                <div class="card-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm">
+                        <img
+                          class="product-image"
+                          src="https://noroff-komputer-store-api.herokuapp.com/assets/images/1.png"
+                        />
+                      </div>
+                      <div class="col-sm">
+                        <h1>Product name</h1>
+                        <p>Description</p>
+                      </div>
+                      <div class="col-sm">
+                        <div>
+                          <label for="product-price">Price:</label>
+                          <h2 id="product-price">1500 NOK</h2>
+                          <button
+                            class="btn btn-info"
+                            id="buy-button"
+                            onclick="user.buy()"
+                          >
+                            BUY NOW
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
           </div>
