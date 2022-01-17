@@ -74,11 +74,12 @@ function User() {
     }
     this.render();
   };
+
   this.render = () => {
     document.getElementById("balance").innerHTML = currencyFormatter.format(
       this.balance
     );
-    if (this.debt > 0) {
+    if (userHasLoan()) {
       document.getElementById("repay-loan-button").style.display = "block";
       document.getElementById("debt").style.display = "block";
       document.getElementById("loan-value").innerHTML =
@@ -90,6 +91,10 @@ function User() {
     document.getElementById("work-balance").value = currencyFormatter.format(
       this.workBalance
     );
+
+    function userHasLoan() {
+      return this.debt > 0;
+    }
   };
   this.render();
 }
