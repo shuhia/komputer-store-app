@@ -7,6 +7,7 @@ const currencyFormatter = new Intl.NumberFormat("de-DE", {
 });
 
 const user = new User({ currencyFormatter });
+globalThis.user = user;
 user.render();
 
 const baseUrl = "https://noroff-komputer-store-api.herokuapp.com";
