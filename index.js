@@ -1,7 +1,11 @@
+const currencyFormatter = new Intl.NumberFormat("de-DE", {
+  style: "currency",
+  currency: "NOK",
+});
+
 function User() {
   this.salary = 100;
   this.balance = 1000;
-  this.currency = "kr";
   this.debt = 0;
   this.workBalance = 0;
   this.cart = [];
@@ -68,7 +72,9 @@ function User() {
     this.render();
   };
   this.render = () => {
-    document.getElementById("balance").innerHTML = this.balance + this.currency;
+    document.getElementById("balance").innerHTML = currencyFormatter.format(
+      this.balance
+    );
     if (this.debt > 0) {
       document.getElementById("repay-loan-button").style.display = "block";
       document.getElementById("debt").style.display = "block";
@@ -79,8 +85,9 @@ function User() {
       document.getElementById("repay-loan-button").style.display = "none";
       document.getElementById("debt").style.display = "none";
     }
-    document.getElementById("work-balance").value =
-      this.workBalance + this.currency;
+    document.getElementById("work-balance").value = currencyFormatter.format(
+      this.workBalance
+    );
   };
   this.render();
 }
@@ -151,7 +158,7 @@ function LaptopView(element) {
     this.title.innerText = laptop.title;
     this.description.innerText = laptop.description;
     this.image.src = hostName + "/" + laptop.image;
-    this.price.innerText = laptop.price + " kr";
+    this.price.innerText = currencyFormatter.format(laptop.price);
     this.buy.onclick = () => {
       user.buy(laptop);
       console.log("buy laptop");
