@@ -1,31 +1,3 @@
-const company = {
-  payroll: 0,
-  salary: 0,
-  pay() {
-    this.payRoll += salary;
-  },
-};
-
-const bank = {
-  balance: 0,
-  debt: 0,
-  interest: 0.1,
-  currency: "kr",
-  withdraw(amount) {
-    if (amount <= this.balance) this.balance -= amount;
-  },
-  deposit(amount) {
-    if (amount >= 0) this.balance += amount;
-  },
-  loan(amount) {
-    // Increase deficit and increase balance
-    const loan = amount;
-    this.balance += loan;
-    this.debt += loan;
-  },
-  repay(amount) {},
-};
-
 function User() {
   this.salary = 100;
   this.balance = 1000;
@@ -100,8 +72,6 @@ function User() {
   };
   this.render();
 }
-const balance = document.getElementById("balance");
-
 const user = new User();
 
 const exampleLaptop = {
