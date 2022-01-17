@@ -23,14 +23,23 @@ function User() {
     this.render();
   };
   this.loan = () => {
-    const input = prompt(
-      "Please enter amount to loan." + " Max: " + this.balance * 2
-    );
-    const amount = parseInt(input, 10);
-    if (amount + this.debt <= 2 * this.balance && this.debt === 0) {
-      this.balance += amount;
-      this.debt += amount;
+    if (this.debt === 0) {
+      const input = prompt(
+        "Please enter amount to loan." + " Max: " + this.balance * 2
+      );
+      const amount = parseInt(input, 10);
+      if (amount + this.debt <= 2 * this.balance) {
+        this.balance += amount;
+        this.debt += amount;
+      } else {
+        alert("You cannot get a loan more than double of your bank balance!");
+      }
+    } else {
+      alert(
+        "You cannot get more than one bank loan before repaying the last loan!"
+      );
     }
+
     this.render();
   };
   this.payDebt = (amount) => {
@@ -52,6 +61,9 @@ function User() {
       this.balance -= laptop.price;
       this.cart.push(laptop);
       console.log("user bought laptop: ", laptop);
+      alert("You are now the owner of laptop: " + laptop.title + "!");
+    } else {
+      alert("You do not have enough funds.");
     }
     this.render();
   };
@@ -73,24 +85,6 @@ function User() {
   this.render();
 }
 const user = new User();
-
-const exampleLaptop = {
-  id: 1,
-  title: "Classic Notebook",
-  description: "A little old, but turns on.",
-  specs: [
-    "Has a screen",
-    "Keyboard works, mostly",
-    "32MB Ram (Not upgradable)",
-    "6GB Hard Disk",
-    "Comes with Floppy Disk Reader (Free) - Requires cable",
-    "Good exercise to carry",
-  ],
-  price: 200,
-  stock: 1,
-  active: true,
-  image: "assets/images/1.png",
-};
 
 const hostName = "https://noroff-komputer-store-api.herokuapp.com";
 
