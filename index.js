@@ -29,9 +29,12 @@ function User() {
   this.loan = () => {
     const hasNoDebt = this.debt === 0;
     if (hasNoDebt) {
-      const input = prompt(
-        "Please enter amount to loan." + " Max: " + this.balance * 2
-      );
+      const input =
+        prompt(
+          "Please enter amount to loan." +
+            " Max: " +
+            currencyFormatter.format(this.balance * 2)
+        ) || 0;
 
       const amount = parseInt(input, 10);
       const amountIsAllowed = amount + this.debt <= 2 * this.balance;
@@ -74,26 +77,27 @@ function User() {
     }
     this.render();
   };
+  const userHasLoan = () => {
+    return this.debt > 0;
+  };
 
   this.render = () => {
     document.getElementById("balance").innerHTML = currencyFormatter.format(
       this.balance
     );
-    if (userHasLoan()) {
-      document.getElementById("repay-loan-button").style.display = "block";
-      document.getElementById("debt").style.display = "block";
-      document.getElementById("loan-value").innerHTML =
-        currencyFormatter.format(this.workBalance);
-    } else {
-      document.getElementById("repay-loan-button").style.display = "none";
-      document.getElementById("debt").style.display = "none";
-    }
+
     document.getElementById("work-balance").value = currencyFormatter.format(
       this.workBalance
     );
+    if (userHasLoan()) {
+      document.getElementById("repay-loan-button").hidden = false;
+      document.getElementById("debt").hidden = false;
 
-    function userHasLoan() {
-      return this.debt > 0;
+      document.getElementById("loan-value").innerHTML =
+        currencyFormatter.format(this.debt);
+    } else {
+      document.getElementById("repay-loan-button").hidden = true;
+      document.getElementById("debt").hidden = true;
     }
   };
   this.render();
@@ -116,8 +120,7 @@ async function fetchLaptops(baseUrl) {
 
 const laptopsView = new LaptopsView(document.querySelector(".laptops"));
 fetchLaptops(baseUrl).then((laptops = []) => {
-  // update view
-  // Display laptops
+  // Display laptopsView after fetching laptops
   laptopsView.render(laptops);
 });
 
@@ -147,8 +150,10 @@ function LaptopsView(element) {
     const handleChange = (e) => {
       const id = e.target.value;
       const selectedLaptop = laptops.find((laptop) => laptop.id == id);
-      if (selectedLaptop) this.displayFeatures(selectedLaptop);
-      if (selectedLaptop) this.laptopView.render(selectedLaptop);
+      if (selectedLaptop) {
+        this.displayFeatures(selectedLaptop);
+        this.laptopView.render(selectedLaptop);
+      }
     };
     this.select.addEventListener("change", handleChange);
   };
