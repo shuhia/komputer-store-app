@@ -27,12 +27,15 @@ function User() {
     this.render();
   };
   this.loan = () => {
-    if (this.debt === 0) {
+    const hasNoDebt = this.debt === 0;
+    if (hasNoDebt) {
       const input = prompt(
         "Please enter amount to loan." + " Max: " + this.balance * 2
       );
+
       const amount = parseInt(input, 10);
-      if (amount + this.debt <= 2 * this.balance) {
+      const amountIsAllowed = amount + this.debt <= 2 * this.balance;
+      if (amountIsAllowed) {
         this.balance += amount;
         this.debt += amount;
       } else {
@@ -61,10 +64,10 @@ function User() {
     this.render();
   };
   this.buy = (laptop) => {
-    if (this.balance >= laptop.price) {
+    const hasEnoughFunds = this.balance >= laptop.price;
+    if (hasEnoughFunds) {
       this.balance -= laptop.price;
       this.cart.push(laptop);
-      console.log("user bought laptop: ", laptop);
       alert("You are now the owner of laptop: " + laptop.title + "!");
     } else {
       alert("You do not have enough funds.");
@@ -92,11 +95,11 @@ function User() {
 }
 const user = new User();
 
-const hostName = "https://noroff-komputer-store-api.herokuapp.com";
+const baseUrl = "https://noroff-komputer-store-api.herokuapp.com";
 
-async function fetchLaptops(hostName) {
+async function fetchLaptops(baseUrl) {
   // Fetch laptops from Noroffs API
-  const laptops = await fetch(hostName + "/computers")
+  const laptops = await fetch(baseUrl + "/computers")
     .then((response) => response.json())
     .catch((error) => {
       console.log(error);
@@ -107,7 +110,7 @@ async function fetchLaptops(hostName) {
 }
 
 const laptopsView = new LaptopsView(document.querySelector(".laptops"));
-fetchLaptops(hostName).then((laptops = []) => {
+fetchLaptops(baseUrl).then((laptops = []) => {
   // update view
   // Display laptops
   laptopsView.render(laptops);
@@ -156,7 +159,7 @@ function LaptopView(element) {
     console.log("render: LaptopView");
     this.title.innerText = laptop.title;
     this.description.innerText = laptop.description;
-    this.image.src = hostName + "/" + laptop.image;
+    this.image.src = baseUrl + "/" + laptop.image;
     this.price.innerText = currencyFormatter.format(laptop.price);
     this.buy.onclick = () => {
       user.buy(laptop);
