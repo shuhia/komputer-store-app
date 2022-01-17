@@ -74,6 +74,7 @@ function User() {
       alert("You are now the owner of laptop: " + laptop.title + "!");
     } else {
       alert("You do not have enough funds.");
+      return laptop;
     }
     this.render();
   };
@@ -118,15 +119,17 @@ async function fetchLaptops(baseUrl) {
   return laptops;
 }
 
-const laptopsView = new LaptopsView(document.querySelector(".laptops"));
+const laptopsView = new LaptopsView(document.querySelector(".laptops"), {
+  user,
+});
 fetchLaptops(baseUrl).then((laptops = []) => {
   // Display laptopsView after fetching laptops
   laptopsView.render(laptops);
 });
 
 // Renders a card with select and display features of the selected laptop
-function LaptopsView(element) {
-  this.laptopView = new LaptopView(document.querySelector(".laptop"));
+function LaptopsView(element, props) {
+  this.laptopView = new LaptopView(document.querySelector(".laptop"), props);
   this.selectedLaptop = {};
   this.select = element.querySelector("select");
   this.list = element.querySelector("ul");
@@ -159,7 +162,7 @@ function LaptopsView(element) {
   };
 }
 
-function LaptopView(element) {
+function LaptopView(element, props) {
   this.title = element.querySelector(".laptop-title");
   this.description = element.querySelector(".laptop-description");
   this.image = element.querySelector(".laptop-image");
@@ -172,8 +175,7 @@ function LaptopView(element) {
     this.image.src = baseUrl + "/" + laptop.image;
     this.price.innerText = currencyFormatter.format(laptop.price);
     this.buy.onclick = () => {
-      user.buy(laptop);
-      console.log("buy laptop");
+      props.user.buy(laptop);
     };
   };
 }
