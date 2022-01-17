@@ -78,9 +78,8 @@ function User() {
     if (this.debt > 0) {
       document.getElementById("repay-loan-button").style.display = "block";
       document.getElementById("debt").style.display = "block";
-
       document.getElementById("loan-value").innerHTML =
-        this.debt + this.currency;
+        currencyFormatter.format(this.workBalance);
     } else {
       document.getElementById("repay-loan-button").style.display = "none";
       document.getElementById("debt").style.display = "none";
