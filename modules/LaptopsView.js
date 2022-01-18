@@ -29,6 +29,6 @@ export default function LaptopsView(element, props) {
         this.laptopView?.render(selectedLaptop);
       }
     };
-    this.select.addEventListener("change", handleChange);
+    select.addEventListener("change", handleChange);
   };
 }
