@@ -1,6 +1,7 @@
 import User from "./modules/User.js";
 import LaptopsView from "./modules/LaptopsView.js";
 import LaptopView from "./modules/LaptopView.js";
+import BankView from "./modules/BankView.js";
 import { fetchLaptops, CurrencyFormatter } from "./modules/utils.js";
 
 // Settings
@@ -15,6 +16,17 @@ const user = new User({ currencyFormatter });
 globalThis.user = user;
 user.render();
 
+// Create a bankView
+const bankView = new BankView(document.querySelector(".bank"), {
+  handleLoan: () => {
+    user.loan();
+    bankView.render(user);
+  },
+});
+
+bankView.render(user);
+
+// Create a workView
 // Create a laptopView
 const laptopView = new LaptopView(document.querySelector(".laptop"), {
   user,

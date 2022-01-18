@@ -45,8 +45,6 @@ export default function User(props) {
         "You cannot get more than one bank loan before repaying the last loan!"
       );
     }
-
-    this.render();
   };
   this.payDebt = (amount) => {
     this.debt -= amount;
@@ -79,22 +77,15 @@ export default function User(props) {
   };
 
   this.render = () => {
-    document.getElementById("balance").innerHTML = currencyFormatter.format(
-      this.balance
-    );
-
     document.getElementById("work-balance").value = currencyFormatter.format(
       this.workBalance
     );
     if (userHasLoan()) {
       document.getElementById("repay-loan-button").hidden = false;
-      document.getElementById("debt").hidden = false;
-
       document.getElementById("loan-value").innerHTML =
         currencyFormatter.format(this.debt);
     } else {
       document.getElementById("repay-loan-button").hidden = true;
-      document.getElementById("debt").hidden = true;
     }
   };
 }
