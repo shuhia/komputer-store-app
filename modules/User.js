@@ -1,5 +1,6 @@
 export default function User(props) {
   const currencyFormatter = props.currencyFormatter;
+  this.name = props?.name || "name";
   this.salary = 100;
   this.balance = 1000;
   this.debt = 0;

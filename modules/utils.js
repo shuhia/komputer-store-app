@@ -12,7 +12,6 @@ async function fetchLaptops(baseUrl) {
     .catch((error) => {
       console.log(error);
     });
-
   console.log(laptops);
   return laptops;
 }

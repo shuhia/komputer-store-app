@@ -2,8 +2,8 @@ import User from "./modules/User.js";
 import LaptopsView from "./modules/LaptopsView.js";
 import LaptopView from "./modules/LaptopView.js";
 import BankView from "./modules/BankView.js";
-import { fetchLaptops, CurrencyFormatter } from "./modules/utils.js";
 import WorkView from "./modules/WorkView.js";
+import { fetchLaptops, CurrencyFormatter } from "./modules/utils.js";
 
 // Settings
 const CURRENCY = "NOK";
@@ -13,7 +13,7 @@ const BASE_URL = "https://noroff-komputer-store-api.herokuapp.com";
 const currencyFormatter = CurrencyFormatter(CURRENCY);
 
 // Create a new user
-const user = new User({ currencyFormatter });
+const user = new User({ name: "Alex", currencyFormatter });
 
 // Create a bankView
 const bankView = new BankView(document.querySelector(".bank"), {
