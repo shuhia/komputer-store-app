@@ -1,18 +1,18 @@
 export default function LaptopView(element, props) {
-  const { baseUrl } = props;
-  this.title = element.querySelector(".laptop-title");
-  this.description = element.querySelector(".laptop-description");
-  this.image = element.querySelector(".laptop-image");
-  this.price = element.querySelector(".laptop-price");
-  this.buy = element.querySelector("button");
+  const { baseUrl, currencyFormatter, user } = props;
+  const title = element.querySelector(".laptop-title");
+  const description = element.querySelector(".laptop-description");
+  const image = element.querySelector(".laptop-image");
+  const price = element.querySelector(".laptop-price");
+  const buy = element.querySelector("button");
   this.render = function (laptop) {
     console.log("render: LaptopView");
-    this.title.innerText = laptop.title;
-    this.description.innerText = laptop.description;
-    this.image.src = baseUrl + "/" + laptop.image;
-    this.price.innerText = props.currencyFormatter.format(laptop.price);
-    this.buy.onclick = () => {
-      props.user.buy(laptop);
+    title.innerText = laptop.title;
+    description.innerText = laptop.description;
+    image.src = baseUrl + "/" + laptop.image;
+    price.innerText = currencyFormatter.format(laptop.price);
+    buy.onclick = () => {
+      user.buy(laptop);
     };
   };
 }
