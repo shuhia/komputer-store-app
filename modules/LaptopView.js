@@ -22,6 +22,7 @@ export default function LaptopView(element, props) {
     title.innerText = laptop.title;
     description.innerText = laptop.description;
     image.src = baseUrl + "/" + laptop.image;
+    image.alt = laptop.description;
     price.innerText = currencyFormatter.format(laptop.price);
     buy.onclick = () => {
       handleBuy(laptop);
