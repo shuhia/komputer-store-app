@@ -6,7 +6,7 @@ export default function User(props) {
   const currencyFormatter = props.currencyFormatter;
   this.name = props?.name || "name";
   this.salary = 100;
-  this.balance = 1000;
+  this.balance = 200;
   this.debt = 0;
   this.workBalance = 0;
   this.cart = [];
