@@ -1,3 +1,8 @@
+/**
+ *
+ * @param {Element} element
+ * @param {Object} props
+ */
 function BankView(element, props) {
   const {
     handleLoan = () => {},

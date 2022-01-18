@@ -1,3 +1,8 @@
+/**
+ *
+ * @param {Element} element
+ * @param {Object} props - Optional: handleSelectedLaptop
+ */
 export default function LaptopsView(element, props) {
   const { handleSelectedLaptop = (laptop) => {} } = props;
   this.selectedLaptop = {};

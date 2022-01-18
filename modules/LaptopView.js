@@ -1,3 +1,7 @@
+/**
+ * @param {Element} element - Container to laptop
+ * @param {Object} props - Required: baseUrl, currencyFormatter
+ */
 export default function LaptopView(element, props) {
   const {
     baseUrl,

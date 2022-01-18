@@ -1,3 +1,7 @@
+/**
+ *  This function creates a user object that is used for all views.
+ * @param {Object} props - requires currencyFormatter
+ */
 export default function User(props) {
   const currencyFormatter = props.currencyFormatter;
   this.name = props?.name || "name";
