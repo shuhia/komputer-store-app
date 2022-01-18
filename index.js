@@ -1,5 +1,5 @@
-import User from "./components/User.js";
-import LaptopsView from "./components/LaptopsView.js";
+import User from "./modules/User.js";
+import LaptopsView from "./modules/LaptopsView.js";
 const CURRENCY = "NOK";
 const currencyFormatter = new Intl.NumberFormat("de-DE", {
   style: "currency",
