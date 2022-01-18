@@ -61,7 +61,9 @@ const laptopView = new LaptopView(document.querySelector(".laptop"), {
 
 // Create a laptopsView
 const laptopsView = new LaptopsView(document.querySelector(".laptops"), {
-  laptopView,
+  handleSelectedLaptop: (laptop) => {
+    laptopView.render(laptop);
+  },
 });
 
 fetchLaptops(BASE_URL)

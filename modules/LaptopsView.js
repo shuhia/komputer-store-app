@@ -1,5 +1,5 @@
 export default function LaptopsView(element, props) {
-  this.laptopView = props?.laptopView;
+  const { handleSelectedLaptop = (laptop) => {} } = props;
   this.selectedLaptop = {};
   const select = element.querySelector("select");
   const list = element.querySelector("ul");
@@ -17,18 +17,19 @@ export default function LaptopsView(element, props) {
     this.selectedLaptop = laptops[0];
     if (this.selectedLaptop) {
       this.displayFeatures(this.selectedLaptop);
-      this.laptopView?.render(this.selectedLaptop);
+      handleSelectedLaptop(this.selectedLaptop);
     }
-
     // Update eventhandler with new laptop
     const handleChange = (e) => {
       const id = e.target.value;
       const selectedLaptop = laptops.find((laptop) => laptop.id == id);
       if (selectedLaptop) {
         this.displayFeatures(selectedLaptop);
-        this.laptopView?.render(selectedLaptop);
+        handleSelectedLaptop(selectedLaptop);
       }
     };
-    select.addEventListener("change", handleChange);
+    select.addEventListener("change", (e) => {
+      handleChange(e);
+    });
   };
 }
