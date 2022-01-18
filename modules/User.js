@@ -62,9 +62,14 @@ export default function User(props) {
     if (hasEnoughFunds) {
       this.balance -= laptop.price;
       this.cart.push(laptop);
-      alert("You are now the owner of laptop: " + laptop.title + "!");
+      setTimeout(
+        () => alert("You are now the owner of laptop: " + laptop.title + "!"),
+        100
+      );
     } else {
-      alert("You do not have enough funds.");
+      setTimeout(() => {
+        alert("You do not have enough funds.");
+      }, 100);
       return laptop;
     }
   };
