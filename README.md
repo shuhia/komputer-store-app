@@ -1,60 +1,100 @@
-# Project Title
+a# Project: Komputer Store App
 
-Simple overview of use/purpose.
+The purpose of this project is to complete assignment 1 and to create a simple online store with HTML, CSS framework and JavaScript.
 
-## Description
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#features">Features</a>
+      <ul>
+        <li><a href="#bank">Bank</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#laptop">Laptop</a></li>
+        <li><a href="#laptops">Laptops</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#instructions-with-VSCode-and-liveShare">Instructions with VSCode and LiveShare</a></li>
+        <li><a href="#dependencies">Dependencies</li>
+        <li><a href="#executing-program">Executing program</li>
+      </ul>
+    </li>
+     <li><a href="#bugs">bugs</li>
+    <li><a href="#authors">Authors</a></li>
+ 
+  </ol>
+</details>
+## Live Version
 
-An in-depth paragraph about your project and overview of use.
+[Link](https://shuhia.github.io/komputer-store-app/)
+
+## Features
+
+Description of features
+
+### Bank
+
+- User starts with 200 NOK
+- User is able to take a loan that is less than double the amount they currently have in the bank
+- User is only able to have 1 loan at most.
+- User is only able to take loans that is not less than zero.
+
+### Work
+
+- User is able to make 100 NOK every time they work
+- User is able to bank (deposit) their money to the bank. If user has a loan 10% will be used to repay the loan.
+- User is able to use their accumulated pay to pay for the loan. Any excess money will be transferred to the bank
+
+### Laptops
+
+- User is able to select the laptop that they are interested in.
+- Specifications on the laptop will be updated every time a laptop is selected
+
+### Laptop
+
+- User is able to buy laptops that they can afford. That means balance has to be bigger than price of laptop
+- User will receive a notification when laptop is bought or that they cannot afford the laptop
+- User can buy the same laptop more than once.
 
 ## Getting Started
 
+### Tools
+
+Editor: VSCode
+Plugins for VSCode: Live Server
+
+### Instructions with VSCode and LiveShare
+
+1. git clone git@github.com:shuhia/komputer-store-app.git
+2. right click on HTML file on explorer and click on start live server
+
 ### Dependencies
 
-- Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-- ex. Windows 10
-
-### Installing
-
-- How/where to download your program
-- Any modifications needed to be made to files/folders
+- JavaScript ES2015
+- HTML 5
+- CSS Framework Bootstrap 5.1.3
 
 ### Executing program
 
-- How to run the program
-- Step-by-step bullets
+Starting the program
 
-```
-code blocks for commands
-```
+1. Start VSCode
+2. Open folder named komputer-store-app
+3. Start live server on port 5500 on file index.html
+4. Enter this link http://localhost:5500/ on for example: Chrome, Mozilla
 
-## Help
+## Bugs
 
-Any advise for common problems or issues.
-
-```
-command to run if program contains helper info
-```
+1. The Laptop The Visor might be missing an image
 
 ## Authors
 
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
-## Version History
-
-- 0.2
-  - Various bug fixes and optimizations
-  - See [commit change]() or See [release history]()
-- 0.1
-  - Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
+[Alex On](https://www.linkedin.com/in/alex-on-0a08b8107/)
 
 Inspiration, code snippets, etc.
 
