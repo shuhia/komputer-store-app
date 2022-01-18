@@ -1,7 +1,7 @@
 function CurrencyFormatter(currency) {
   return new Intl.NumberFormat("de-DE", {
     style: "currency",
-    currency: CURRENCY,
+    currency: currency,
   });
 }
 
