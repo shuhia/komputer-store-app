@@ -12,9 +12,9 @@ function BankView(element, props) {
   loanButton.addEventListener("click", handleLoan);
   this.render = (user) => {
     balance.innerHTML = ` <label for="balance">Balance:</label>
-    <output id="balance">${currencyFormatter(user.balance)}</output>`;
+    <output id="balance">${currencyFormatter.format(user.balance)}</output>`;
     if (user.debt > 0) {
-      debt.innerHTML = `Loan value: <span id="loan-value">${currencyFormatter(
+      debt.innerHTML = `Loan value: <span id="loan-value">${currencyFormatter.format(
         user.debt
       )}</span>`;
       debt.hidden = false;

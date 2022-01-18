@@ -1,5 +1,11 @@
 export default function LaptopView(element, props) {
-  const { baseUrl, currencyFormatter, user } = props;
+  const {
+    baseUrl,
+    currencyFormatter,
+    handleBuy = (laptop) => {
+      return laptop;
+    },
+  } = props;
   const title = element.querySelector(".laptop-title");
   const description = element.querySelector(".laptop-description");
   const image = element.querySelector(".laptop-image");
@@ -12,7 +18,7 @@ export default function LaptopView(element, props) {
     image.src = baseUrl + "/" + laptop.image;
     price.innerText = currencyFormatter.format(laptop.price);
     buy.onclick = () => {
-      user.buy(laptop);
+      handleBuy(laptop);
     };
   };
 }
