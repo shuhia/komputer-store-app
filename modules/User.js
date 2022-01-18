@@ -7,7 +7,6 @@ export default function User(props) {
   this.cart = [];
   this.work = () => {
     this.workBalance += this.salary;
-    this.render();
   };
   this.bank = () => {
     if (this.debt > 0) {
@@ -20,7 +19,6 @@ export default function User(props) {
       this.balance += this.workBalance;
     }
     this.workBalance = 0;
-    this.render();
   };
   this.loan = () => {
     const hasNoDebt = this.debt === 0;
@@ -28,7 +26,7 @@ export default function User(props) {
       const input =
         prompt(
           "Please enter amount to loan." +
-            " Max: " +
+            "0-" +
             currencyFormatter.format(this.balance * 2)
         ) || 0;
 
@@ -58,7 +56,6 @@ export default function User(props) {
     const leftOver = this.payDebt(this.workBalance);
     this.workBalance = 0;
     this.balance += leftOver;
-    this.render();
   };
   this.buy = (laptop) => {
     const hasEnoughFunds = this.balance >= laptop.price;
@@ -70,22 +67,8 @@ export default function User(props) {
       alert("You do not have enough funds.");
       return laptop;
     }
-    this.render();
   };
-  const userHasLoan = () => {
+  this.hasLoan = () => {
     return this.debt > 0;
-  };
-
-  this.render = () => {
-    document.getElementById("work-balance").value = currencyFormatter.format(
-      this.workBalance
-    );
-    if (userHasLoan()) {
-      document.getElementById("repay-loan-button").hidden = false;
-      document.getElementById("loan-value").innerHTML =
-        currencyFormatter.format(this.debt);
-    } else {
-      document.getElementById("repay-loan-button").hidden = true;
-    }
   };
 }
