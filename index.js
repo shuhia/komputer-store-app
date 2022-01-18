@@ -1,33 +1,22 @@
 import User from "./modules/User.js";
 import LaptopsView from "./modules/LaptopsView.js";
-const CURRENCY = "NOK";
-const currencyFormatter = new Intl.NumberFormat("de-DE", {
-  style: "currency",
-  currency: CURRENCY,
-});
+import { fetchLaptops, CurrencyFormatter } from "./modules/utils.js";
 
+// Settings
+const CURRENCY = "NOK";
+const BASE_URL = "https://noroff-komputer-store-api.herokuapp.com";
+const currencyFormatter = CurrencyFormatter(currency);
+
+// Create a new user
 const user = new User({ currencyFormatter });
 globalThis.user = user;
 user.render();
 
-const baseUrl = "https://noroff-komputer-store-api.herokuapp.com";
-
-async function fetchLaptops(baseUrl) {
-  // Fetch laptops from Noroffs API
-  const laptops = await fetch(baseUrl + "/computers")
-    .then((response) => response.json())
-    .catch((error) => {
-      console.log(error);
-    });
-
-  console.log(laptops);
-  return laptops;
-}
-
+// Create a laptopsView
 const laptopsView = new LaptopsView(document.querySelector(".laptops"), {
   user,
   currencyFormatter,
-  baseUrl,
+  BASE_URL,
 });
 
 fetchLaptops(baseUrl).then((laptops = []) => {
