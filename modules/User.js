@@ -32,6 +32,11 @@ export default function User(props) {
         ) || 0;
 
       const amount = parseInt(input, 10);
+
+      if (amount < 0) {
+        alert("You cannot borrow less than zero");
+        return 0;
+      }
       const amountIsAllowed = amount + this.debt <= 2 * this.balance;
       if (amountIsAllowed) {
         this.balance += amount;
