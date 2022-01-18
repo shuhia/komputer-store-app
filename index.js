@@ -5,6 +5,8 @@ import { fetchLaptops, CurrencyFormatter } from "./modules/utils.js";
 // Settings
 const CURRENCY = "NOK";
 const BASE_URL = "https://noroff-komputer-store-api.herokuapp.com";
+
+// CurrencyFormatter adds currency at the end of the value.
 const currencyFormatter = CurrencyFormatter(currency);
 
 // Create a new user
@@ -19,7 +21,9 @@ const laptopsView = new LaptopsView(document.querySelector(".laptops"), {
   BASE_URL,
 });
 
-fetchLaptops(baseUrl).then((laptops = []) => {
-  // Display laptopsView after fetching laptops
-  laptopsView.render(laptops);
-});
+fetchLaptops(BASE_URL)
+  .then((laptops = []) => {
+    // Display laptopsView after fetching laptops
+    laptopsView.render(laptops);
+  })
+  .catch((error) => console.log(error));

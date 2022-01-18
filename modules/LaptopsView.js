@@ -20,7 +20,7 @@ export default function LaptopsView(element, props) {
       this.displayFeatures(this.selectedLaptop);
       this.laptopView.render(this.selectedLaptop);
     }
-
+    // Update eventhandler with new laptop
     const handleChange = (e) => {
       const id = e.target.value;
       const selectedLaptop = laptops.find((laptop) => laptop.id == id);
