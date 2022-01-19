@@ -24,7 +24,6 @@ The purpose of this project is to complete assignment 1 and to create a simple o
         <li><a href="#executing-program">Executing program</li>
       </ul>
     </li>
-     <li><a href="#bugs">bugs</li>
     <li><a href="#authors">Authors</a></li>
  
   </ol>
@@ -88,10 +87,6 @@ Starting the program
 2. Open folder named komputer-store-app
 3. Start live server on port 5500 on file index.html
 4. Enter this link http://localhost:5500/ on for example: Chrome, Mozilla
-
-## Bugs
-
-1. The Laptop The Visor might be missing an image
 
 ## Authors
 
