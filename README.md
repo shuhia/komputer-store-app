@@ -1,4 +1,4 @@
-a# Project: Komputer Store App
+# Project: Komputer Store App
 
 The purpose of this project is to complete assignment 1 and to create a simple online store with HTML, CSS framework and JavaScript.
 
@@ -29,6 +29,7 @@ The purpose of this project is to complete assignment 1 and to create a simple o
  
   </ol>
 </details>
+
 ## Live Version
 
 [Link](https://shuhia.github.io/komputer-store-app/)
