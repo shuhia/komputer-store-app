@@ -68,6 +68,12 @@ const laptopsView = new LaptopsView(document.querySelector(".laptops"), {
 
 fetchLaptops(BASE_URL)
   .then((laptops = []) => {
+    // Fix visor image path
+    const visorLaptop = laptops.find((laptop) => laptop.title === "The Visor");
+    if (visorLaptop) {
+      visorLaptop.image = visorLaptop.image.replace("jpg", "png");
+    }
+
     // Display laptopsView after fetching laptops
     laptopsView.render(laptops);
   })
