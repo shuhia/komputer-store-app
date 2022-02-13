@@ -20,39 +20,30 @@ const bankView = new BankView(document.querySelector(".bank"), {
   currencyFormatter,
   handleLoan: () => {
     user.loan();
-    bankView.render(user);
-    workView.render(user);
   },
 });
-
+user.subscribe((user) => bankView.render(user));
 bankView.render(user);
-
 // Create a workView
 
 const workView = new WorkView(document.querySelector(".work"), {
   handleBank: () => {
     user.bank();
-    workView.render(user);
-    bankView.render(user);
   },
   handleWork: () => {
     user.work();
-    workView.render(user);
   },
   handleRepayLoan: () => {
     user.repayLoan();
-    workView.render(user);
-    bankView.render(user);
   },
   currencyFormatter,
 });
-
+user.subscribe((user) => workView.render(user));
 workView.render(user);
 // Create a laptopView
 const laptopView = new LaptopView(document.querySelector(".laptop"), {
   handleBuy: (laptop) => {
     user.buy(laptop);
-    bankView.render(user);
   },
   user,
   currencyFormatter,

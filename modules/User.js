@@ -12,6 +12,7 @@ export default function User(props) {
   this.cart = [];
   this.work = () => {
     this.workBalance += this.salary;
+    this.notifySubscriber();
   };
   this.bank = () => {
     if (this.debt > 0) {
@@ -24,6 +25,7 @@ export default function User(props) {
       this.balance += this.workBalance;
     }
     this.workBalance = 0;
+    this.notifySubscriber();
   };
   this.loan = () => {
     const hasNoDebt = this.debt === 0;
@@ -45,6 +47,7 @@ export default function User(props) {
       if (amountIsAllowed) {
         this.balance += amount;
         this.debt += amount;
+        this.notifySubscriber();
       } else {
         alert("You cannot get a loan more than double of your bank balance!");
       }
@@ -66,6 +69,7 @@ export default function User(props) {
     const leftOver = this.payDebt(this.workBalance);
     this.workBalance = 0;
     this.balance += leftOver;
+    this.notifySubscriber();
   };
   this.buy = (laptop) => {
     const hasEnoughFunds = this.balance >= laptop.price;
@@ -82,8 +86,16 @@ export default function User(props) {
       }, 100);
       return laptop;
     }
+    this.notifySubscriber();
   };
   this.hasLoan = () => {
     return this.debt > 0;
+  };
+  this.subscribers = [];
+  this.subscribe = (subscriber) => {
+    this.subscribers.push(subscriber);
+  };
+  this.notifySubscriber = () => {
+    this.subscribers.forEach((subscriber) => subscriber(this));
   };
 }
